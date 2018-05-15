@@ -1,0 +1,24 @@
+1. How many vowels are there in the names of USA States?
+2. Visualize the vowels distribution.
+
+library(stringr)
+library(ggplot2)
+
+#Finding vowels in the USA state names
+head(USArrests)
+states = rownames(USArrests)
+vowels = c('a','e','i','o','u')
+num_vowels = vector(mode = "integer",length = 5)
+for (i in seq_along(vowels))
+{ 
+   num_aux = str_count(tolower(states), vowels[i])
+   num_vowels[i] = sum(num_aux)
+}
+
+names(num_vowels) = vowels
+sort(num_vowels, decreasing = TRUE)
+
+#visualize the vowels in USA state names
+
+barplot(num_vowels, main = "Vowels in the USA State names", border = NA)
+
